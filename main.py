@@ -8,8 +8,12 @@ Stdlib only, deterministic, no network, no env secrets,
 no reading other files.
 """
 
-import os
 from pathlib import Path
+
+# One letter, one vote: "A" is coffee — the morning ritual, the
+# smell, the first cup that makes the day start. Tea is calm,
+# coffee is alive, and the judge reads this single letter.
+CHOICE = b"A"
 
 
 def main() -> None:
@@ -17,10 +21,10 @@ def main() -> None:
     fallback = Path("output/entry.txt")
     try:
         primary.parent.mkdir(parents=True, exist_ok=True)
-        primary.write_bytes(b"A")
+        primary.write_bytes(CHOICE)
     except OSError:
         fallback.parent.mkdir(parents=True, exist_ok=True)
-        fallback.write_bytes(b"A")
+        fallback.write_bytes(CHOICE)
 
 
 if __name__ == "__main__":
